@@ -47,8 +47,7 @@ uk-nonstore-retail-analytics/
  │   └── Tables/                      # 10 Generated analytical tables (CSV/Excel)
  │
  ├── 05_Documentation/
- │   ├── data_dictionary.md           # Data dictionary and variable descriptions
- │   └── final_summary.md             # Comprehensive executive summary
+ │   └── data_dictionary.md           # Data dictionary and variable descriptions
  │
  ├── 06_Portfolio/
  │   └── final_summary.md             # Portfolio summary document
