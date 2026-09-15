@@ -56,6 +56,7 @@ uk-nonstore-retail-analytics/
  ├── .gitignore                       # Git ignore rules
  ├── CHANGELOG.md                     # Version history
  └── README.md                        # This file
+```
 
 ## 🚀 Quick Start
 
