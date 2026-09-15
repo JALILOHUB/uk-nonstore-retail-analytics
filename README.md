@@ -1,4 +1,3 @@
-```markdown
 # 📊 UK Non-Store Retail Analytics
 
 > **Version:** 1.0 (Initial Portfolio Release)  
@@ -57,7 +56,6 @@ uk-nonstore-retail-analytics/
  ├── .gitignore                       # Git ignore rules
  ├── CHANGELOG.md                     # Version history
  └── README.md                        # This file
-```
 
 ## 🚀 Quick Start
 
