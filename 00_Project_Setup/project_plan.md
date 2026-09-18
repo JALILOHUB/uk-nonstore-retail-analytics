@@ -1,328 +1,296 @@
-# \# Project Plan — UCI Online Retail Analysis
+\# Project Plan — UCI Online Retail Analysis
 
-# 
 
-# \*\*Project Lead:\*\* Abdeljalil El Khyati  
 
-# \*\*Start Date:\*\* September 2026  
+\*\*Project Lead:\*\* Abdeljalil El Khyati  
 
-# \*\*Status:\*\* In Progress (Phase 9 Complete)
+\*\*Start Date:\*\* September 2026  
 
-# 
+\*\*Current Status:\*\* ✅ Completed (V1.1 Validated Analytical Release)
 
-# \---
 
-# 
 
-# \## ✅ Completed Phases
+\---
 
-# 
 
-# \### Phase 1: Environment Setup \& Data Acquisition
 
-# \- \[x] Set up project folder structure
+\## ✅ Completed Phases
 
-# \- \[x] Import required libraries (pandas, numpy, matplotlib, seaborn)
 
-# \- \[x] Fetch data from UCI Repository (ID: 352)
 
-# \- \[x] Merge missing columns (InvoiceNo, StockCode) from 'ids' key
+\### Phase 1: Environment Setup \& Data Acquisition
 
-# \- \[x] Verify complete dataset: 541,909 rows, 8 columns
+\- \[x] Set up project folder structure
 
-# 
+\- \[x] Import required libraries (`pandas`, `numpy`, `matplotlib`, `seaborn`)
 
-# \### Phase 2: Initial Inspection
+\- \[x] Fetch data from UCI Repository (ID: 352)
 
-# \- \[x] Examined dataset structure and data types
+\- \[x] Reconstruct the complete analytical input by combining the required identifier fields
 
-# \- \[x] Identified potential data quality issues
+\- \[x] Verify complete dataset: \*\*541,909 rows, 8 columns\*\*
 
-# \- \[x] Documented initial observations
 
-# \- \[x] Identified need for column merging
 
-# 
+\### Phase 2: Initial Inspection
 
-# \### Phase 3: Data Quality Assessment
+\- \[x] Examine dataset structure and data types
 
-# \- \[x] Missing values analysis
+\- \[x] Identify potential data quality issues
 
-# &#x20; - CustomerID: 24.93% (135,080 records)
+\- \[x] Document initial observations
 
-# &#x20; - Description: 0.27% (1,454 records)
+\- \[x] Verify the expected analytical columns
 
-# \- \[x] Duplicate detection: 5,268 exact duplicate rows
 
-# \- \[x] Outlier detection: Extreme outlier (80,995 units)
 
-# \- \[x] Operational items identification: £362,268.47
+\### Phase 3: Data Quality Assessment
 
-# 
+\- \[x] Missing-value analysis: `CustomerID` (24.93%), `Description` (0.27%)
 
-# \### Phase 4: Cleaning \& Preparation
+\- \[x] Duplicate detection: \*\*5,268 exact duplicate rows\*\*
 
-# \- \[x] Removed 5,268 exact duplicates
+\- \[x] Outlier detection: \*\*80,995-unit extreme observation\*\*
 
-# \- \[x] Isolated extreme outlier (preserved for revenue reconciliation)
+\- \[x] Operational/non-product item identification: \*\*£362,103.47 across 2,149 rows\*\*
 
-# \- \[x] Excluded operational items from product analysis
 
-# \- \[x] Labeled missing CustomerID as "Unknown"
 
-# \- \[x] Created clean dataset: 522,728 physical product transactions
+\### Phase 4: Cleaning \& Preparation
 
-# \- \[x] Created separate datasets: df\_sales, df\_customers
+\- \[x] Remove 5,268 exact duplicate rows
 
-# 
+\- \[x] Isolate the extreme outlier while preserving it for reconciliation
 
-# \### Phase 5: Baseline KPIs
+\- \[x] Exclude operational/non-product items from physical-product analysis
 
-# \- \[x] Total Revenue: £10,642,110.80
+\- \[x] Represent missing `CustomerID` values as `Unknown CustomerID` for aggregate sales analysis
 
-# \- \[x] Valid Transactions: 524,878
+\- \[x] Create clean physical-product dataset: \*\*522,728 rows\*\*
 
-# \- \[x] Known Customers: 4,338 (83.5% of revenue)
+\- \[x] Create separate analytical populations for sales and customer analysis
 
-# \- \[x] Unknown/Guest Revenue: 16.5%
 
-# \- \[x] Average Order Value (AOV): £533.17
 
-# 
+\### Phase 5: Baseline KPIs
 
-# \### Phase 6: Seasonal Analysis
+\- \[x] Total valid sales revenue: \*\*£10,642,110.80\*\*
 
-# \- \[x] Identified November 2011 peak: £1.5M (2x monthly average)
+\- \[x] Valid sales rows: \*\*524,878\*\*
 
-# \- \[x] Identified dual-driver phenomenon
+\- \[x] Known customers: \*\*4,338\*\*
 
-# \- \[x] Analyzed November vs. annual Top 10 products
+\- \[x] Known-customer revenue share: \*\*83.5%\*\*
 
-# \- \[x] Confirmed 40% overlap (hybrid model)
+\- \[x] Unknown `CustomerID` revenue share: \*\*16.5%\*\*
 
-# 
+\- \[x] Average Order Value (AOV): \*\*£533.17\*\* (computed from `df\_sales`)
 
-# \### Phase 7: Product Analysis
 
-# \- \[x] Identified top revenue products
 
-# \- \[x] Confirmed B2B wholesale patterns (Avg\_Qty > 20)
+\### Phase 6: Seasonal \& Product Analysis
 
-# \- \[x] Identified dead stock (Bottom 10 products)
+\- \[x] Identify November 2011 peak: \*\*£1,503,866.78\*\*
 
-# \- \[x] Separated operational items from product rankings
+\- \[x] Identify distinct November patterns involving core-product amplification and seasonal-product emergence
 
-# 
+\- \[x] Compare November Top 10 products with Top 10 products from other observed months
 
-# \### Phase 8: Customer Analysis (Pareto \& Lorenz)
+\- \[x] Rank physical products by observed revenue
 
-# \- \[x] Validated Pareto 26/80 rule
+\- \[x] Identify a low-revenue product tail for potential catalog review
 
-# \- \[x] Calculated Gini Coefficient: 0.142
 
-# \- \[x] Identified broad B2B base (\~1,128 high-value customers)
 
-# \- \[x] Confirmed healthy concentration (not whale-dependent)
+\### Phase 7: Customer \& Geographic Analytics
 
-# 
+\- \[x] Customer concentration analysis using the known-customer population
 
-# \### Phase 9: RFM Segmentation
+\- \[x] Pareto analysis: approximately \*\*26% of known customers generate 80% of known-customer revenue\*\*
 
-# \- \[x] Calculated Recency, Frequency, Monetary for 4,338 customers
+\- \[x] Validate corrected Gini coefficient: \*\*0.716\*\*
 
-# \- \[x] Assigned RFM scores (quintiles 1-5)
+\- \[x] RFM segmentation into four behavioral groups
 
-# \- \[x] Created 4 behavioral segments:
+\- \[x] Geographic revenue distribution analysis
 
-# &#x20; - Champions: 28.6% (1,243 customers)
+\- \[x] Champion concentration by country
 
-# &#x20; - Loyal Customers: 23.6% (1,022 customers)
 
-# &#x20; - At Risk: 27.4% (1,188 customers)
 
-# &#x20; - Lost/Hibernating: 20.4% (885 customers)
+\### Phase 8: V1.1 Validation \& Handoff
 
-# \- \[x] Identified retention opportunity: 47.8% At Risk or Lost
+\- \[x] Formalize row and revenue reconciliation with \*\*£0.00 revenue difference\*\*
 
-# 
+\- \[x] Validate clean physical-product revenue: \*\*£10,111,537.73\*\*
 
-# \### Phase 10: Geographic Analysis
+\- \[x] Validate operational revenue: \*\*£362,103.47\*\*
 
-# \- \[x] Analyzed revenue distribution by country
+\- \[x] Refine interpretation boundaries, including:
 
-# \- \[x] Identified UK concentration: 84.6% of revenue
+&#x20; - `Unknown CustomerID` instead of unsupported guest-checkout assumptions
 
-# \- \[x] Cross-referenced RFM Champions with geography
+&#x20; - bulk-purchasing indicators instead of confirmed B2B transaction claims
 
-# \- \[x] Identified dual concentration crisis: 90% of Champions in UK
+&#x20; - historical RFM revenue baseline instead of guaranteed recoverable revenue
 
-# \- \[x] Identified high-value niche markets (EIRE, Netherlands, Australia)
+&#x20; - low-revenue product tail instead of confirmed dead stock
 
-# \- \[x] Developed strategic recommendations for diversification
+\- \[x] Export \*\*10 analytical charts\*\*
 
-# 
+\- \[x] Export \*\*20 analytical tables\*\*
 
-# \---
+\- \[x] Generate executive presentation in \*\*PPTX and PDF\*\* formats
 
-# 
 
-# \## 🔜 Next Steps
 
-# 
+\---
 
-# \### Phase 11: Customer Lifetime Value (CLV)
 
-# \- \[ ] Calculate lifetime value of Champions
 
-# \- \[ ] Compare CLV with customer acquisition cost
+\## 📊 Key Deliverables Status
 
-# \- \[ ] Identify most valuable customer segments
 
-# 
 
-# \### Phase 12: Cohort Retention Analysis
+\- \[x] Clean physical-product dataset — 522,728 rows
 
-# \- \[ ] Track retention rates by acquisition month
+\- \[x] Baseline KPI outputs
 
-# \- \[ ] Identify churn patterns and triggers
+\- \[x] Monthly and seasonal revenue analysis
 
-# \- \[ ] Develop retention strategies for At Risk segment
+\- \[x] Product performance analysis
 
-# 
+\- \[x] Customer concentration analysis
 
-# \### Phase 13: Market Basket Analysis
+\- \[x] RFM customer segmentation
 
-# \- \[ ] Identify frequently purchased together products
+\- \[x] Geographic concentration analysis
 
-# \- \[ ] Calculate association rules (support, confidence, lift)
+\- \[x] Operational revenue analysis
 
-# \- \[ ] Develop cross-selling recommendations
+\- \[x] Management implications and recommended next analyses
 
-# 
+\- \[x] Executive Presentation (PDF \& PPTX)
 
-# \### Phase 14: Pricing Elasticity Analysis
+\- \[x] Portfolio documentation
 
-# \- \[ ] Analyze price sensitivity for high-demand products
 
-# \- \[ ] Test price optimization scenarios
 
-# \- \[ ] Develop pricing strategy recommendations
+\---
 
-# 
 
-# \### Phase 15: Channel Attribution
 
-# \- \[ ] Analyze sources of Unknown customers
+\## 📅 Timeline
 
-# \- \[ ] Develop conversion strategies for guest checkouts
 
-# \- \[ ] Calculate conversion ROI
 
-# 
+| Phase | Start Date | End Date | Status |
 
-# \### Phase 16: Professionalization \& Optimization
+|-------|------------|----------|--------|
 
-# \- \[ ] Code refactoring for performance
+| Phase 1–4: Data Preparation | Sep 2026 | Sep 2026 | ✅ Complete |
 
-# \- \[ ] Optimize memory usage
+| Phase 5–7: Baseline, Product \& Customer Analysis | Sep 2026 | Sep 2026 | ✅ Complete |
 
-# \- \[ ] Enhance documentation
+| Phase 8: V1.1 Validation \& Handoff | Sep 2026 | Sep 2026 | ✅ Complete |
 
-# \- \[ ] Create automated reporting pipeline
+| Phase 9+: Advanced Analytics (v2.0) | TBD | TBD |  Planned |
 
-# 
 
-# \---
 
-# 
+\---
 
-# \## 📊 Key Deliverables
 
-# 
 
-# \### Completed ✅
+\## 🎯 Success Criteria
 
-# \- \[x] Clean dataset (522,728 transactions)
 
-# \- \[x] Baseline KPIs dashboard
 
-# \- \[x] Seasonal analysis report
+\- \[x] Evidence-based decision making throughout
 
-# \- \[x] Product performance analysis
+\- \[x] Documented data-quality decisions
 
-# \- \[x] Customer segmentation (RFM)
+\- \[x] Traceable revenue and row reconciliation
 
-# \- \[x] Geographic concentration analysis
+\- \[x] Separation of physical-product and operational revenue
 
-# \- \[x] Strategic recommendations (8 priorities)
+\- \[x] Explicit analytical limitations
 
-# 
+\- \[x] Business-oriented interpretation of observed patterns
 
-# \### In Progress 
+\- \[x] Actionable management implications supported by the analysis
 
-# \- \[ ] Customer Lifetime Value model
+\- \[ ] Customer Lifetime Value model with validated financial assumptions (v2.0)
 
-# \- \[ ] Cohort retention analysis
+\- \[ ] Cohort analysis with retention metrics (v2.0)
 
-# \- \[ ] Market basket analysis
+\- \[ ] Market basket analysis with association rules (v2.0)
 
-# \- \[ ] Pricing elasticity model
+\- \[ ] Automated reporting pipeline (v2.0)
 
-# 
 
-# \---
 
-# 
+\---
 
-# \## 📅 Timeline
 
-# 
 
-# | Phase | Start Date | End Date | Status |
+\##  Future Development (v2.0 Planned)
 
-# |-------|------------|----------|--------|
 
-# | Phase 1-4: Data Preparation | Sep 2026 | Sep 2026 | ✅ Complete |
 
-# | Phase 5-7: Baseline \& Product Analysis | Sep 2026 | Sep 2026 | ✅ Complete |
+\### Customer Analytics
 
-# | Phase 8-10: Customer \& Geographic Analysis | Sep 2026 | Sep 2026 | ✅ Complete |
+\- \[ ] Customer Lifetime Value (CLV) modelling
 
-# | Phase 11-15: Advanced Analytics | Sep 2026 | Oct 2026 | 🔜 Planned |
+\- \[ ] Cohort retention analysis
 
-# | Phase 16: Professionalization | Oct 2026 | Oct 2026 | 🔜 Planned |
+\- \[ ] More granular customer reactivation analysis
 
-# 
+\- \[ ] Churn-risk modelling with validation data
 
-# \---
 
-# 
 
-# \##  Success Criteria
+\### Product \& Commercial Analytics
 
-# 
+\- \[ ] Market basket analysis
 
-# \- \[x] Evidence-based decision making throughout
+\- \[ ] Demand forecasting
 
-# \- \[x] Professional documentation
+\- \[ ] Pricing analysis
 
-# \- \[x] Actionable business recommendations
+\- \[ ] Product affinity analysis
 
-# \- \[ ] CLV model with ROI calculations
 
-# \- \[ ] Cohort analysis with retention metrics
 
-# \- \[ ] Market basket analysis with association rules
+\### Business Economics
 
-# \- \[ ] Automated reporting pipeline
+\- \[ ] Profitability and margin analysis
 
-# 
+\- \[ ] Inventory economics
 
-# \---
+\- \[ ] Product rationalisation using external cost/inventory data
 
-# 
 
-# \*\*Last Updated:\*\* September 2026  
 
-# \*\*Next Review:\*\* After Phase 11 completion
+\### Data Engineering \& BI
+
+\- \[ ] Production-style data pipeline
+
+\- \[ ] Star-schema modelling
+
+\- \[ ] Automated KPI refresh
+
+\- \[ ] BI reporting layer
+
+\- \[ ] Potential cloud-based data engineering architecture
+
+
+
+\---
+
+
+
+\*\*Last Updated:\*\* September 2026  
+
+\*\*Next Review:\*\* Prior to initiating v2.0 Advanced Analytics
 

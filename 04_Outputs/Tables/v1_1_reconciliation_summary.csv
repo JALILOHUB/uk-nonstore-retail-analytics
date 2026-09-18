@@ -1,0 +1,15 @@
+﻿Metric,Value
+Raw transactions,541909
+Valid sales rows,524878
+Extreme outlier rows,1
+Operational rows,2149
+Expected physical-product rows,522728
+Actual physical-product rows,522728
+Valid sales revenue,10642110.804
+Extreme outlier revenue,168469.6
+Operational revenue,362103.47000000003
+Expected physical-product revenue,10111537.734
+Actual physical-product revenue,10111537.734000003
+Row difference,0
+Revenue difference,3.725290298461914e-09
+Reconciliation status,PASSED

@@ -1,37 +1,78 @@
-# Python cache files
+# ==========================================
+# Python
+# ==========================================
+
 __pycache__/
-*.pyc
-*.pyo
+*.py[cod]
 *.pyd
 
-# Jupyter Notebook checkpoints
+
+# ==========================================
+# Jupyter
+# ==========================================
+
 .ipynb_checkpoints/
 
-# OS files
+
+# ==========================================
+# Operating System
+# ==========================================
+
 .DS_Store
 Thumbs.db
 desktop.ini
 
-# IDE files
+
+# ==========================================
+# IDE / Editor
+# ==========================================
+
 .vscode/
 .idea/
 *.swp
 *.swo
 
-# Data files (large files - not needed in Git)
-*.csv
-*.xlsx
-*.xls
-*.parquet
 
-# Keep specific CSV files in Raw_Data (Power BI splits)
+# ==========================================
+# Working / Temporary Data
+# ==========================================
+
+# Generated working datasets are reproducible
+# and should not be committed by default.
+02_Working_Data/*.csv
+
+# Keep the working-data directory itself in the repository.
+!02_Working_Data/.gitkeep
+
+
+# ==========================================
+# Raw Data
+# ==========================================
+
+# Raw UCI dataset is intentionally kept in this project.
 !01_Raw_Data/*.csv
 
-# Environment files
+
+# ==========================================
+# Analytical Output Tables
+# ==========================================
+
+# Output tables are portfolio artifacts and should be tracked.
+!04_Outputs/Tables/*.csv
+
+
+# ==========================================
+# Environment / Secrets
+# ==========================================
+
 .env
 .venv/
 venv/
 
-# Temporary files
+
+# ==========================================
+# Temporary / Log Files
+# ==========================================
+
 *.tmp
 *.log
