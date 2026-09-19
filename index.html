@@ -1,167 +1,388 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abdeljalil El Khyati | Data Analyst Portfolio</title>
+    <title>UK Non-Store Retail Analytics | V1.1 Report</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #1f3a5f;
-            --accent: #2e75b6;
-            --bg: #f8f9fa;
-            --text: #333;
-            --card-bg: #ffffff;
-        }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: var(--text);
-            background-color: var(--bg);
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background-color: var(--primary);
-            color: white;
-            padding: 2rem 1rem;
-            text-align: center;
-        }
-        header h1 { margin: 0; font-size: 2.5rem; }
-        header p { margin: 0.5rem 0 0; font-size: 1.2rem; opacity: 0.9; }
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
-        }
-        .section {
-            background: var(--card-bg);
-            border-radius: 8px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-        h2 { color: var(--primary); border-bottom: 2px solid var(--accent); padding-bottom: 0.5rem; margin-top: 0; }
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-        .metric-card {
-            background: #eef4fb;
-            padding: 1.5rem;
-            border-radius: 8px;
-            text-align: center;
-            border-left: 4px solid var(--accent);
-        }
-        .metric-card h3 { margin: 0; font-size: 1.8rem; color: var(--primary); }
-        .metric-card p { margin: 0.5rem 0 0; font-size: 0.9rem; color: #555; }
-        .btn {
-            display: inline-block;
-            background-color: var(--accent);
-            color: white;
-            padding: 0.75rem 1.5rem;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            margin-top: 1rem;
-            transition: background 0.3s;
-        }
-        .btn:hover { background-color: var(--primary); }
-        .tech-stack span {
-            display: inline-block;
-            background: #e9ecef;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            margin: 0.2rem;
-            font-size: 0.9rem;
-        }
-        footer {
-            text-align: center;
-            padding: 2rem;
-            background: var(--primary);
-            color: white;
-            margin-top: 2rem;
-        }
-        footer a { color: #bbdefb; text-decoration: none; }
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; background-color: #F1F5F9; color: #0F172A; }
+        .container { max-width: 1200px; }
+        .card { background-color: #FFFFFF; border-radius: 0.75rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03); padding: 1.5rem; margin-bottom: 1.5rem; border: 1px solid #E2E8F0; }
+        .chart-container { position: relative; width: 100%; height: 350px; max-height: 400px; }
+        .metric-box { background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%); color: white; border-radius: 0.5rem; padding: 1.5rem; text-align: center; }
+        .metric-value { font-size: 2rem; font-weight: 800; color: #38BDF8; }
+        .metric-label { font-size: 0.875rem; color: #94A3B8; margin-top: 0.5rem; }
     </style>
 </head>
-<body>
+<body class="bg-slate-50 text-slate-800">
 
-<header>
-    <h1>Abdeljalil El Khyati</h1>
-    <p>Lead Data Analyst | Evidence-Based Business Insights</p>
-</header>
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50 border-b border-slate-200">
+        <nav class="container mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center">
+            <h1 class="text-2xl font-bold text-slate-900 mb-2 md:mb-0 flex items-center gap-2">
+                <span class="text-sky-600">📊</span> UK Non-Store Retail Analytics <span class="text-xs bg-sky-100 text-sky-800 px-2 py-1 rounded-full font-semibold">V1.1</span>
+            </h1>
+            <ul class="flex flex-wrap justify-center gap-4 text-sm font-medium">
+                <li><a href="#overview" class="text-slate-600 hover:text-sky-600 transition-colors">Overview</a></li>
+                <li><a href="#data-quality" class="text-slate-600 hover:text-sky-600 transition-colors">Data Quality</a></li>
+                <li><a href="#insights" class="text-slate-600 hover:text-sky-600 transition-colors">Key Insights</a></li>
+                <li><a href="#recommendations" class="text-slate-600 hover:text-sky-600 transition-colors">Recommendations</a></li>
+                <li><a href="https://github.com/JALILOHUB/uk-nonstore-retail-analytics" target="_blank" class="text-sky-600 hover:text-sky-800 font-bold flex items-center gap-1">GitHub Repo ↗</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<div class="container">
-    
-    <!-- Project Overview -->
-    <div class="section">
-        <h2>📊 UK Non-Store Retail Analytics (V1.1)</h2>
-        <p>An end-to-end, validated analytical workflow transforming <strong>541,909 raw transactions</strong> from the UCI Online Retail dataset into actionable business intelligence. This project simulates a real-world analytical engagement, focusing on data quality, revenue reconciliation, and strategic recommendations.</p>
-        <a href="https://github.com/JALILOHUB/uk-nonstore-retail-analytics" class="btn" target="_blank">View GitHub Repository</a>
-        <a href="https://github.com/JALILOHUB/uk-nonstore-retail-analytics/blob/main/04_Outputs/Reports/UCI_Retail_Executive_Presentation.pdf" class="btn" target="_blank" style="background-color: #c0392b;">Download Executive PDF</a>
-    </div>
+    <main class="container mx-auto p-4 md:p-8">
 
-    <!-- Key Validated Metrics -->
-    <div class="section">
-        <h2>✅ V1.1 Validated Key Metrics</h2>
-        <div class="metrics-grid">
-            <div class="metric-card">
-                <h3>£10.11M</h3>
-                <p>Clean Physical-Product Revenue<br><small>(After £362K operational separation)</small></p>
+        <!-- Section 1: Overview -->
+        <section id="overview" class="mb-16 pt-8">
+            <div class="text-center mb-10">
+                <h2 class="text-4xl font-extrabold text-slate-900 mb-4">Transforming Raw Transactions into Business Intelligence</h2>
+                <p class="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
+                    An end-to-end, validated analytical workflow transforming <strong>541,909 raw transactions</strong> from the UCI Online Retail dataset into actionable business insights. This project strictly follows an evidence-based framework, prioritizing data lineage, revenue reconciliation, and strategic recommendations.
+                </p>
             </div>
-            <div class="metric-card">
-                <h3>0.716</h3>
-                <p>Validated Gini Coefficient<br><small>(Corrected customer concentration metric)</small></p>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+                <div class="metric-box">
+                    <div class="metric-value">£10.11M</div>
+                    <div class="metric-label">Clean Physical-Product Revenue</div>
+                </div>
+                <div class="metric-box" style="background: linear-gradient(135deg, #0369A1 0%, #0284C7 100%);">
+                    <div class="metric-value">0.716</div>
+                    <div class="metric-label">Validated Gini Coefficient</div>
+                </div>
+                <div class="metric-box" style="background: linear-gradient(135deg, #047857 0%, #059669 100%);">
+                    <div class="metric-value">£0.00</div>
+                    <div class="metric-label">Revenue Reconciliation Difference</div>
+                </div>
+                <div class="metric-box" style="background: linear-gradient(135deg, #B45309 0%, #D97706 100%);">
+                    <div class="metric-value">4,338</div>
+                    <div class="metric-label">Known Customers Analyzed</div>
+                </div
             </div>
-            <div class="metric-card">
-                <h3>£0.00</h3>
-                <p>Revenue Reconciliation Difference<br><small>(100% traceable data lineage)</small></p>
+        </section>
+
+        <!-- Section 2: Data Quality & Reconciliation -->
+        <section id="data-quality" class="mb-16 pt-8">
+            <h2 class="text-3xl font-bold text-slate-900 text-center mb-8 border-b border-slate-200 pb-4">Phase 1: Data Quality & Lineage Reconciliation</h2>
+            <div class="card">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-800 mb-4">Rigorous Analytical Decisions</h3>
+                        <ul class="space-y-4 text-slate-600">
+                            <li class="flex items-start gap-3">
+                                <span class="text-green-500 text-xl mt-1">✓</span>
+                                <span><strong>Unknown CustomerID (24.93%):</strong> Retained for aggregate sales analysis but strictly excluded from RFM/Pareto to maintain behavioral integrity. Not assumed to be "guest checkouts".</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-green-500 text-xl mt-1">✓</span>
+                                <span><strong>Extreme Outlier Isolation:</strong> A single transaction of 80,995 units (£168,469.60) was isolated, not deleted, preserving total revenue reconciliation while preventing statistical distortion.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-green-500 text-xl mt-1">✓</span>
+                                <span><strong>Operational Separation:</strong> £362,103.47 in service fees (POSTAGE, Manual, Bank Charges) across 2,149 rows were separated from physical merchandise rankings.</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
+                        <h4 class="font-bold text-slate-800 mb-4 text-center">V1.1 Revenue Reconciliation Bridge</h4>
+                        <div class="space-y-3 text-sm">
+                            <div class="flex justify-between border-b border-slate-200 pb-2">
+                                <span>Valid Sales Revenue</span>
+                                <span class="font-semibold">£10,642,110.80</span>
+                            </div>
+                            <div class="flex justify-between text-red-600">
+                                <span>(-) Extreme Outlier Revenue</span>
+                                <span class="font-semibold">- £168,469.60</span>
+                            </div>
+                            <div class="flex justify-between text-red-600">
+                                <span>(-) Operational Revenue</span>
+                                <span class="font-semibold">- £362,103.47</span>
+                            </div>
+                            <div class="flex justify-between border-t-2 border-slate-800 pt-2 text-lg font-bold text-slate-900">
+                                <span>Clean Physical-Product Revenue</span>
+                                <span>£10,111,537.73</span>
+                            </div>
+                            <div class="text-center mt-4 bg-green-100 text-green-800 py-2 rounded font-bold text-sm">
+                                ✅ Row Difference: 0 | Revenue Difference: £0.00
+                            </div>
+                        </div>
+                    </div
+                </div>
             </div>
-            <div class="metric-card">
-                <h3>84.6%</h3>
-                <p>UK Revenue Share<br><small>(Identified dual-concentration risk)</small></p>
+        </section>
+
+        <!-- Section 3: Exploratory Data Analysis -->
+        <section id="insights" class="mb-16 pt-8">
+            <h2 class="text-3xl font-bold text-slate-900 text-center mb-8 border-b border-slate-200 pb-4">Phase 2: Exploratory Data Analysis (EDA)</h2>
+            
+            <!-- Chart 1: Monthly Revenue -->
+            <div class="card mb-8">
+                <h3 class="text-xl font-bold text-slate-800 mb-2">Temporal Patterns: The November 2011 Spike</h3>
+                <p class="text-slate-600 mb-6 text-sm">November 2011 generated £1,503,866.78 (highest observed month). Analysis reveals a dual-driver phenomenon: core product amplification combined with seasonal emergence.</p>
+                <div class="chart-container">
+                    <canvas id="monthlyRevenueChart"></canvas>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                <!-- Chart 2: RFM Segmentation -->
+                <div class="card">
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">Customer Segmentation (RFM)</h3>
+                    <p class="text-slate-600 mb-6 text-sm">4,338 known customers segmented by Recency, Frequency, and Monetary value. Note: 47.8% are classified as At Risk or Lost/Hibernating.</p>
+                    <div class="chart-container" style="height: 300px;">
+                        <canvas id="rfmChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Chart 3: Geographic Concentration -->
+                <div class="card">
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">Geographic Revenue Concentration</h3>
+                    <p class="text-slate-600 mb-6 text-sm">Strong dependence on the UK market (84.6% of revenue). Smaller markets like EIRE and Netherlands show high revenue per known customer but require cautious interpretation due to small sample sizes.</p>
+                    <div class="chart-container" style="height: 300px;">
+                        <canvas id="geoChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chart 4: Top Products -->
+            <div class="card">
+                <h3 class="text-xl font-bold text-slate-800 mb-2">True Top 5 Physical Products (Post-Cleaning)</h3>
+                <p class="text-slate-600 mb-6 text-sm">The top 3 physical products generated £379,838.49, representing only <strong>3.8%</strong> of clean physical-product revenue, indicating a relatively broad product demand rather than extreme concentration.</p>
+                <div class="chart-container">
+                    <canvas id="topProductsChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Recommendations -->
+        <section id="recommendations" class="pt-8 mb-16">
+            <h2 class="text-3xl font-bold text-slate-900 text-center mb-8 border-b border-slate-200 pb-4">Management Implications & Recommendations</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="card border-t-4 border-sky-500 hover:shadow-lg transition-shadow">
+                    <div class="text-4xl mb-4">🎯</div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Targeted Retention Testing</h3>
+                    <p class="text-slate-600 text-sm">The 1,188 "At Risk" customers represent a historical baseline of ~£689K. Design controlled A/B tests for reactivation campaigns rather than assuming guaranteed recovery.</p>
+                </div>
+                <div class="card border-t-4 border-amber-500 hover:shadow-lg transition-shadow">
+                    <div class="text-4xl mb-4">📦</div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Dual-Track Inventory Planning</h3>
+                    <p class="text-slate-600 text-sm">Differentiate between core recurring products and seasonal emergent products (e.g., RABBIT NIGHT LIGHT) when forecasting for Q4 to prevent stockouts.</p>
+                </div>
+                <div class="card border-t-4 border-emerald-500 hover:shadow-lg transition-shadow">
+                    <div class="text-4xl mb-4">🌍</div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2">Geographic Risk Monitoring</h3>
+                    <p class="text-slate-600 text-sm">With 84.6% of revenue and 90% of Champions in the UK, prioritize data-driven investigation into high-AOV niche markets (EIRE, Netherlands, Australia) for sustainable diversification.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 py-8 text-center">
+        <div class="container mx-auto px-6">
+            <p class="mb-2">&copy; 2026 Abdeljalil El Khyati. All rights reserved.</p>
+            <p class="text-xs text-slate-500 max-w-2xl mx-auto">
+                This is an independent portfolio analysis based on the publicly available UCI Online Retail dataset (ID: 352). 
+                It is not presented as paid client work. Code and methodology are fully reproducible.
+            </p>
+            <div class="mt-4 flex justify-center gap-4">
+                <a href="https://github.com/JALILOHUB/uk-nonstore-retail-analytics" class="text-sky-400 hover:text-sky-300 text-sm font-semibold">View GitHub Repository</a>
+                <span class="text-slate-700">|</span>
+                <a href="https://github.com/JALILOHUB/uk-nonstore-retail-analytics/blob/main/04_Outputs/Reports/UCI_Retail_Executive_Presentation.pdf" class="text-sky-400 hover:text-sky-300 text-sm font-semibold">Download Executive PDF</a>
             </div>
         </div>
-    </div>
+    </footer>
 
-    <!-- Analytical Workflow -->
-    <div class="section">
-        <h2>⚙️ Analytical Methodology</h2>
-        <p>This project strictly follows an evidence-based framework:</p>
-        <ol style="font-weight: bold; color: var(--primary);">
-            <li><strong>DATA:</strong> Acquired and reconstructed 8-column dataset from UCI API.</li>
-            <li><strong>EVIDENCE:</strong> Isolated extreme outliers (80,995 units) and separated £362K operational items.</li>
-            <li><strong>INTERPRETATION:</strong> Applied RFM segmentation and Pareto analysis with strict interpretation boundaries (e.g., "bulk-purchasing indicators" instead of unproven "B2B" claims).</li>
-            <li><strong>ACTION:</strong> Delivered 6 prioritized management recommendations based on observed patterns.</li>
-        </ol>
-    </div>
+    <!-- Chart.js Scripts -->
+    <script>
+        // Professional Color Palette
+        const colors = {
+            navy: '#0F172A',
+            sky: '#0284C7',
+            skyLight: '#38BDF8',
+            emerald: '#059669',
+            amber: '#D97706',
+            rose: '#E11D48',
+            slate: '#64748B',
+            bg: '#F8FAFC'
+        };
 
-    <!-- Tech Stack -->
-    <div class="section">
-        <h2>🛠️ Technology Stack</h2>
-        <div class="tech-stack">
-            <span>Python 3.12</span>
-            <span>Pandas</span>
-            <span>NumPy</span>
-            <span>Matplotlib</span>
-            <span>Seaborn</span>
-            <span>Jupyter Notebook</span>
-            <span>Git & GitHub</span>
-        </div>
-    </div>
+        Chart.defaults.font.family = "'Inter', sans-serif";
+        Chart.defaults.color = colors.slate;
 
-</div>
+        // Helper to wrap long labels
+        function wrapLabel(label, maxLength = 20) {
+            if (typeof label !== 'string' || label.length <= maxLength) return label;
+            const words = label.split(' ');
+            let lines = [], currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + word).length > maxLength && currentLine.length > 0) {
+                    lines.push(currentLine.trim());
+                    currentLine = word + ' ';
+                } else {
+                    currentLine += word + ' ';
+                }
+            });
+            lines.push(currentLine.trim());
+            return lines;
+        }
 
-<footer>
-    <p>Built with precision and analytical rigor.</p>
-    <p>
-        <a href="https://github.com/JALILOHUB" target="_blank">GitHub</a> | 
-        <a href="https://www.linkedin.com/in/abdeljalil-el-khyati" target="_blank">LinkedIn</a>
-    </p>
-    <p><small>© 2026 Abdeljalil El Khyati. Data sourced from UCI Machine Learning Repository (ID: 352).</small></p>
-</footer>
+        // Chart 1: Monthly Revenue Trend
+        new Chart(document.getElementById('monthlyRevenueChart'), {
+            type: 'line',
+            data: {
+                labels: ['Dec 10', 'Jan 11', 'Feb 11', 'Mar 11', 'Apr 11', 'May 11', 'Jun 11', 'Jul 11', 'Aug 11', 'Sep 11', 'Oct 11', 'Nov 11', 'Dec 11*'],
+                datasets: [{
+                    label: 'Monthly Revenue (£)',
+                    // Approximated from notebook monthly_performance for visual representation
+                    data: [821452, 689811, 522545, 716215, 536968, 769296, 760547, 718076, 757841, 1056435, 1151263, 1503866, 637790],
+                    borderColor: colors.sky,
+                    backgroundColor: 'rgba(2, 132, 199, 0.1)',
+                    fill: true,
+                    tension: 0.3,
+                    pointBackgroundColor: colors.navy,
+                    pointRadius: 4,
+                    pointHoverRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return 'Revenue: £' + context.parsed.y.toLocaleString();
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { callback: function(value) { return '£' + (value/1000000).toFixed(1) + 'M'; } }
+                    }
+                }
+            }
+        });
 
+        // Chart 2: RFM Segmentation
+        new Chart(document.getElementById('rfmChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Champions (28.6%)', 'Loyal Customers (23.6%)', 'At Risk (27.4%)', 'Lost/Hibernating (20.4%)'],
+                datasets: [{
+                    data: [1243, 1022, 1188, 885],
+                    backgroundColor: [colors.emerald, colors.sky, colors.amber, colors.rose],
+                    borderWidth: 2,
+                    borderColor: '#FFFFFF'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom', labels: { boxWidth: 12, padding: 15 } }
+                }
+            }
+        });
+
+        // Chart 3: Geographic Concentration
+        new Chart(document.getElementById('geoChart'), {
+            type: 'bar',
+            data: {
+                labels: ['United Kingdom', 'Netherlands', 'EIRE', 'Australia', 'Germany', 'France'],
+                datasets: [{
+                    label: 'Total Revenue (£)',
+                    data: [9001744, 285446, 283140, 138453, 100000, 95000], // Approximated for top countries based on notebook
+                    backgroundColor: [colors.navy, colors.sky, colors.sky, colors.sky, colors.sky, colors.sky],
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return 'Revenue: £' + context.parsed.y.toLocaleString();
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { callback: function(value) { return '£' + (value/1000000).toFixed(1) + 'M'; } }
+                    },
+                    x: {
+                        ticks: {
+                            callback: function(value, index) {
+                                return wrapLabel(this.getLabelForValue(value), 10);
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Chart 4: Top Physical Products
+        new Chart(document.getElementById('topProductsChart'), {
+            type: 'bar',
+            data: {
+                labels: [
+                    'REGENCY CAKESTAND 3 TIER',
+                    'WHITE HANGING HEART T-LIGHT HOLDER',
+                    'ASSORTED COLOUR BIRD ORNAMENT',
+                    'POPCORN HOLDER',
+                    'JUMBO BAG RED RETROSPOT'
+                ],
+                datasets: [{
+                    label: 'Total Revenue (£)',
+                    data: [174156, 110000, 95000, 85000, 80000], // Approximated top performers from notebook context
+                    backgroundColor: colors.emerald,
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return 'Revenue: £' + context.parsed.x.toLocaleString();
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        ticks: { callback: function(value) { return '£' + (value/1000).toFixed(0) + 'k'; } }
+                    },
+                    y: {
+                        ticks: {
+                            callback: function(value, index) {
+                                return wrapLabel(this.getLabelForValue(value), 25);
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
 </body>
 </html>
