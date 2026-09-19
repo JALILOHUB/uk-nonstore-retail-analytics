@@ -11,7 +11,7 @@ This repository contains a comprehensive, evidence-based analysis of the **UCI O
 
 The project transforms more than **541,000 raw transactions** into a structured analytical workflow covering data quality, validation, product performance, seasonality, customer behaviour, geographic concentration, and management-oriented business insights.
 
-The project is designed as an **independent portfolio analysis simulating a real-world analytical engagement**. It is not presented as paid client work.
+The project is designed as an **independent business case study analysis based on real-world transactional data from a UK non-store retailer**. It is not presented as paid client work.
 
 The analytical workflow follows:
 
