@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en" dir="ltr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,30 +9,50 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
     <style>
-        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; background-color: #F1F5F9; color: #0F172A; }
+        body { font-family: 'Inter', sans-serif; }
         .container { max-width: 1200px; }
         .card { background-color: #FFFFFF; border-radius: 0.75rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03); padding: 1.5rem; margin-bottom: 1.5rem; border: 1px solid #E2E8F0; }
+        .dark .card { background-color: #1E293B; border-color: #334155; }
         .chart-container { position: relative; width: 100%; height: 350px; max-height: 400px; }
         .metric-box { background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%); color: white; border-radius: 0.5rem; padding: 1.5rem; text-align: center; }
         .metric-value { font-size: 2rem; font-weight: 800; color: #38BDF8; }
         .metric-label { font-size: 0.875rem; color: #94A3B8; margin-top: 0.5rem; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800">
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 transition-colors duration-300">
 
     <!-- Header -->
-    <header class="bg-white shadow-sm sticky top-0 z-50 border-b border-slate-200">
+    <header class="bg-white dark:bg-slate-800 shadow-sm sticky top-0 z-50 border-b border-slate-200 dark:border-slate-700 transition-colors duration-300">
         <nav class="container mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center">
-            <h1 class="text-2xl font-bold text-slate-900 mb-2 md:mb-0 flex items-center gap-2">
-                <span class="text-sky-600">📊</span> UK Non-Store Retail Analytics <span class="text-xs bg-sky-100 text-sky-800 px-2 py-1 rounded-full font-semibold">V1.1</span>
+            <h1 class="text-xl md:text-2xl font-bold text-slate-900 dark:text-white mb-2 md:mb-0 flex items-center gap-2">
+                <span class="text-sky-600">📊</span> UK Non-Store Retail <span class="text-xs bg-sky-100 dark:bg-sky-900 text-sky-800 dark:text-sky-200 px-2 py-1 rounded-full font-semibold">V1.1</span>
             </h1>
-            <ul class="flex flex-wrap justify-center gap-4 text-sm font-medium">
-                <li><a href="#overview" class="text-slate-600 hover:text-sky-600 transition-colors">Overview</a></li>
-                <li><a href="#data-quality" class="text-slate-600 hover:text-sky-600 transition-colors">Data Quality</a></li>
-                <li><a href="#insights" class="text-slate-600 hover:text-sky-600 transition-colors">Key Insights</a></li>
-                <li><a href="#recommendations" class="text-slate-600 hover:text-sky-600 transition-colors">Recommendations</a></li>
-                <li><a href="https://github.com/JALILOHUB/uk-nonstore-retail-analytics" target="_blank" class="text-sky-600 hover:text-sky-800 font-bold flex items-center gap-1">GitHub Repo ↗</a></li>
+            <ul class="flex flex-wrap justify-center gap-3 md:gap-4 text-sm font-medium items-center">
+                <li><a href="#overview" class="text-slate-600 dark:text-slate-300 hover:text-sky-600 dark:hover:text-sky-400 transition-colors">Overview</a></li>
+                <li><a href="#data-quality" class="text-slate-600 dark:text-slate-300 hover:text-sky-600 dark:hover:text-sky-400 transition-colors">Data Quality</a></li>
+                <li><a href="#insights" class="text-slate-600 dark:text-slate-300 hover:text-sky-600 dark:hover:text-sky-400 transition-colors">Key Insights</a></li>
+                <li><a href="#recommendations" class="text-slate-600 dark:text-slate-300 hover:text-sky-600 dark:hover:text-sky-400 transition-colors">Recommendations</a></li>
+                <li>
+                    <a href="https://github.com/JALILOHUB/uk-nonstore-retail-analytics/blob/main/03_Notebooks/Online_Retail_Analysis_Final_V1.1.ipynb" target="_blank" class="text-slate-600 dark:text-slate-300 hover:text-sky-600 dark:hover:text-sky-400 transition-colors flex items-center gap-1 font-semibold">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
+                        Notebook
+                    </a>
+                </li>
+                <!-- Dark Mode Toggle Button -->
+                <li>
+                    <button id="theme-toggle" class="p-2 ml-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors focus:outline-none" aria-label="Toggle Dark Mode">
+                        <!-- Sun Icon (shows in dark mode) -->
+                        <svg id="theme-toggle-light-icon" class="w-5 h-5 hidden dark:block text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+                        <!-- Moon Icon (shows in light mode) -->
+                        <svg id="theme-toggle-dark-icon" class="w-5 h-5 block dark:hidden text-slate-600" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                    </button>
+                </li>
             </ul>
         </nav>
     </header>
@@ -42,13 +62,13 @@
         <!-- Section 1: Overview -->
         <section id="overview" class="mb-16 pt-8">
             <div class="text-center mb-10">
-                <h2 class="text-4xl font-extrabold text-slate-900 mb-4">Transforming Raw Transactions into Business Intelligence</h2>
-                <p class="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-4">Transforming Raw Transactions into Business Intelligence</h2>
+                <p class="text-lg text-slate-600 dark:text-slate-400 max-w-3xl mx-auto leading-relaxed">
                     An end-to-end, validated analytical workflow transforming <strong>541,909 raw transactions</strong> from the UCI Online Retail dataset into actionable business insights. This project strictly follows an evidence-based framework, prioritizing data lineage, revenue reconciliation, and strategic recommendations.
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-12">
                 <div class="metric-box">
                     <div class="metric-value">£10.11M</div>
                     <div class="metric-label">Clean Physical-Product Revenue</div>
@@ -64,68 +84,68 @@
                 <div class="metric-box" style="background: linear-gradient(135deg, #B45309 0%, #D97706 100%);">
                     <div class="metric-value">4,338</div>
                     <div class="metric-label">Known Customers Analyzed</div>
-                </div
+                </div>
             </div>
         </section>
 
         <!-- Section 2: Data Quality & Reconciliation -->
         <section id="data-quality" class="mb-16 pt-8">
-            <h2 class="text-3xl font-bold text-slate-900 text-center mb-8 border-b border-slate-200 pb-4">Phase 1: Data Quality & Lineage Reconciliation</h2>
+            <h2 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white text-center mb-8 border-b border-slate-200 dark:border-slate-700 pb-4">Phase 1: Data Quality & Lineage Reconciliation</h2>
             <div class="card">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                     <div>
-                        <h3 class="text-xl font-bold text-slate-800 mb-4">Rigorous Analytical Decisions</h3>
-                        <ul class="space-y-4 text-slate-600">
+                        <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-4">Rigorous Analytical Decisions</h3>
+                        <ul class="space-y-4 text-slate-600 dark:text-slate-400">
                             <li class="flex items-start gap-3">
                                 <span class="text-green-500 text-xl mt-1">✓</span>
-                                <span><strong>Unknown CustomerID (24.93%):</strong> Retained for aggregate sales analysis but strictly excluded from RFM/Pareto to maintain behavioral integrity. Not assumed to be "guest checkouts".</span>
+                                <span><strong class="text-slate-800 dark:text-slate-200">Unknown CustomerID (24.93%):</strong> Retained for aggregate sales analysis but strictly excluded from RFM/Pareto to maintain behavioral integrity. Not assumed to be "guest checkouts".</span>
                             </li>
                             <li class="flex items-start gap-3">
                                 <span class="text-green-500 text-xl mt-1">✓</span>
-                                <span><strong>Extreme Outlier Isolation:</strong> A single transaction of 80,995 units (£168,469.60) was isolated, not deleted, preserving total revenue reconciliation while preventing statistical distortion.</span>
+                                <span><strong class="text-slate-800 dark:text-slate-200">Extreme Outlier Isolation:</strong> A single transaction of 80,995 units (£168,469.60) was isolated, not deleted, preserving total revenue reconciliation while preventing statistical distortion.</span>
                             </li>
                             <li class="flex items-start gap-3">
                                 <span class="text-green-500 text-xl mt-1">✓</span>
-                                <span><strong>Operational Separation:</strong> £362,103.47 in service fees (POSTAGE, Manual, Bank Charges) across 2,149 rows were separated from physical merchandise rankings.</span>
+                                <span><strong class="text-slate-800 dark:text-slate-200">Operational Separation:</strong> £362,103.47 in service fees (POSTAGE, Manual, Bank Charges) across 2,149 rows were separated from physical merchandise rankings.</span>
                             </li>
                         </ul>
                     </div>
-                    <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
-                        <h4 class="font-bold text-slate-800 mb-4 text-center">V1.1 Revenue Reconciliation Bridge</h4>
-                        <div class="space-y-3 text-sm">
-                            <div class="flex justify-between border-b border-slate-200 pb-2">
+                    <div class="bg-slate-50 dark:bg-slate-700/50 p-6 rounded-lg border border-slate-200 dark:border-slate-600 transition-colors duration-300">
+                        <h4 class="font-bold text-slate-800 dark:text-slate-100 mb-4 text-center">V1.1 Revenue Reconciliation Bridge</h4>
+                        <div class="space-y-3 text-sm text-slate-700 dark:text-slate-300">
+                            <div class="flex justify-between border-b border-slate-200 dark:border-slate-600 pb-2">
                                 <span>Valid Sales Revenue</span>
                                 <span class="font-semibold">£10,642,110.80</span>
                             </div>
-                            <div class="flex justify-between text-red-600">
+                            <div class="flex justify-between text-red-600 dark:text-red-400">
                                 <span>(-) Extreme Outlier Revenue</span>
                                 <span class="font-semibold">- £168,469.60</span>
                             </div>
-                            <div class="flex justify-between text-red-600">
+                            <div class="flex justify-between text-red-600 dark:text-red-400">
                                 <span>(-) Operational Revenue</span>
                                 <span class="font-semibold">- £362,103.47</span>
                             </div>
-                            <div class="flex justify-between border-t-2 border-slate-800 pt-2 text-lg font-bold text-slate-900">
+                            <div class="flex justify-between border-t-2 border-slate-800 dark:border-slate-400 pt-2 text-lg font-bold text-slate-900 dark:text-white">
                                 <span>Clean Physical-Product Revenue</span>
                                 <span>£10,111,537.73</span>
                             </div>
-                            <div class="text-center mt-4 bg-green-100 text-green-800 py-2 rounded font-bold text-sm">
+                            <div class="text-center mt-4 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 py-2 rounded font-bold text-sm">
                                 ✅ Row Difference: 0 | Revenue Difference: £0.00
                             </div>
                         </div>
-                    </div
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Section 3: Exploratory Data Analysis -->
         <section id="insights" class="mb-16 pt-8">
-            <h2 class="text-3xl font-bold text-slate-900 text-center mb-8 border-b border-slate-200 pb-4">Phase 2: Exploratory Data Analysis (EDA)</h2>
+            <h2 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white text-center mb-8 border-b border-slate-200 dark:border-slate-700 pb-4">Phase 2: Exploratory Data Analysis (EDA)</h2>
             
             <!-- Chart 1: Monthly Revenue -->
             <div class="card mb-8">
-                <h3 class="text-xl font-bold text-slate-800 mb-2">Temporal Patterns: The November 2011 Spike</h3>
-                <p class="text-slate-600 mb-6 text-sm">November 2011 generated £1,503,866.78 (highest observed month). Analysis reveals a dual-driver phenomenon: core product amplification combined with seasonal emergence.</p>
+                <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-2">Temporal Patterns: The November 2011 Spike</h3>
+                <p class="text-slate-600 dark:text-slate-400 mb-6 text-sm">November 2011 generated £1,503,866.78 (highest observed month). Analysis reveals a dual-driver phenomenon: core product amplification combined with seasonal emergence.</p>
                 <div class="chart-container">
                     <canvas id="monthlyRevenueChart"></canvas>
                 </div>
@@ -134,8 +154,8 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                 <!-- Chart 2: RFM Segmentation -->
                 <div class="card">
-                    <h3 class="text-xl font-bold text-slate-800 mb-2">Customer Segmentation (RFM)</h3>
-                    <p class="text-slate-600 mb-6 text-sm">4,338 known customers segmented by Recency, Frequency, and Monetary value. Note: 47.8% are classified as At Risk or Lost/Hibernating.</p>
+                    <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-2">Customer Segmentation (RFM)</h3>
+                    <p class="text-slate-600 dark:text-slate-400 mb-6 text-sm">4,338 known customers segmented by Recency, Frequency, and Monetary value. Note: 47.8% are classified as At Risk or Lost/Hibernating.</p>
                     <div class="chart-container" style="height: 300px;">
                         <canvas id="rfmChart"></canvas>
                     </div>
@@ -143,8 +163,8 @@
 
                 <!-- Chart 3: Geographic Concentration -->
                 <div class="card">
-                    <h3 class="text-xl font-bold text-slate-800 mb-2">Geographic Revenue Concentration</h3>
-                    <p class="text-slate-600 mb-6 text-sm">Strong dependence on the UK market (84.6% of revenue). Smaller markets like EIRE and Netherlands show high revenue per known customer but require cautious interpretation due to small sample sizes.</p>
+                    <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-2">Geographic Revenue Concentration</h3>
+                    <p class="text-slate-600 dark:text-slate-400 mb-6 text-sm">Strong dependence on the UK market (84.6% of revenue). Smaller markets like EIRE and Netherlands show high revenue per known customer but require cautious interpretation due to small sample sizes.</p>
                     <div class="chart-container" style="height: 300px;">
                         <canvas id="geoChart"></canvas>
                     </div>
@@ -153,8 +173,8 @@
 
             <!-- Chart 4: Top Products -->
             <div class="card">
-                <h3 class="text-xl font-bold text-slate-800 mb-2">True Top 5 Physical Products (Post-Cleaning)</h3>
-                <p class="text-slate-600 mb-6 text-sm">The top 3 physical products generated £379,838.49, representing only <strong>3.8%</strong> of clean physical-product revenue, indicating a relatively broad product demand rather than extreme concentration.</p>
+                <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-2">True Top 5 Physical Products (Post-Cleaning)</h3>
+                <p class="text-slate-600 dark:text-slate-400 mb-6 text-sm">The top 3 physical products generated £379,838.49, representing only <strong>3.8%</strong> of clean physical-product revenue, indicating a relatively broad product demand rather than extreme concentration.</p>
                 <div class="chart-container">
                     <canvas id="topProductsChart"></canvas>
                 </div>
@@ -163,29 +183,29 @@
 
         <!-- Section 4: Recommendations -->
         <section id="recommendations" class="pt-8 mb-16">
-            <h2 class="text-3xl font-bold text-slate-900 text-center mb-8 border-b border-slate-200 pb-4">Management Implications & Recommendations</h2>
+            <h2 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white text-center mb-8 border-b border-slate-200 dark:border-slate-700 pb-4">Management Implications & Recommendations</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="card border-t-4 border-sky-500 hover:shadow-lg transition-shadow">
+                <div class="card border-t-4 border-sky-500 hover:shadow-lg transition-shadow duration-300">
                     <div class="text-4xl mb-4">🎯</div>
-                    <h3 class="text-lg font-bold text-slate-900 mb-2">Targeted Retention Testing</h3>
-                    <p class="text-slate-600 text-sm">The 1,188 "At Risk" customers represent a historical baseline of ~£689K. Design controlled A/B tests for reactivation campaigns rather than assuming guaranteed recovery.</p>
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Targeted Retention Testing</h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm">The 1,188 "At Risk" customers represent a historical baseline of ~£689K. Design controlled A/B tests for reactivation campaigns rather than assuming guaranteed recovery.</p>
                 </div>
-                <div class="card border-t-4 border-amber-500 hover:shadow-lg transition-shadow">
+                <div class="card border-t-4 border-amber-500 hover:shadow-lg transition-shadow duration-300">
                     <div class="text-4xl mb-4">📦</div>
-                    <h3 class="text-lg font-bold text-slate-900 mb-2">Dual-Track Inventory Planning</h3>
-                    <p class="text-slate-600 text-sm">Differentiate between core recurring products and seasonal emergent products (e.g., RABBIT NIGHT LIGHT) when forecasting for Q4 to prevent stockouts.</p>
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Dual-Track Inventory Planning</h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm">Differentiate between core recurring products and seasonal emergent products (e.g., RABBIT NIGHT LIGHT) when forecasting for Q4 to prevent stockouts.</p>
                 </div>
-                <div class="card border-t-4 border-emerald-500 hover:shadow-lg transition-shadow">
+                <div class="card border-t-4 border-emerald-500 hover:shadow-lg transition-shadow duration-300">
                     <div class="text-4xl mb-4">🌍</div>
-                    <h3 class="text-lg font-bold text-slate-900 mb-2">Geographic Risk Monitoring</h3>
-                    <p class="text-slate-600 text-sm">With 84.6% of revenue and 90% of Champions in the UK, prioritize data-driven investigation into high-AOV niche markets (EIRE, Netherlands, Australia) for sustainable diversification.</p>
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Geographic Risk Monitoring</h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm">With 84.6% of revenue and 90% of Champions in the UK, prioritize data-driven investigation into high-AOV niche markets (EIRE, Netherlands, Australia) for sustainable diversification.</p>
                 </div>
             </div>
         </section>
 
     </main>
 
-        <footer class="bg-slate-900 text-slate-400 py-8 text-center">
+    <footer class="bg-slate-900 dark:bg-slate-950 text-slate-400 py-8 text-center border-t border-slate-800">
         <div class="container mx-auto px-6">
             <p class="mb-2">&copy; 2026 Abdeljalil El Khyati. All rights reserved.</p>
             <p class="text-xs text-slate-500 max-w-2xl mx-auto">
@@ -200,14 +220,14 @@
                     GitHub Repository
                 </a>
                 
-                <span class="text-slate-600 hidden sm:inline">|</span>
+                <span class="text-slate-600 dark:text-slate-700 hidden sm:inline">|</span>
                 
                 <a href="https://github.com/JALILOHUB/uk-nonstore-retail-analytics/blob/main/04_Outputs/Reports/UCI_Retail_Executive_Presentation.pdf" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-semibold transition-colors flex items-center gap-1">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
                     Executive PDF
                 </a>
                 
-                <span class="text-slate-600 hidden sm:inline">|</span>
+                <span class="text-slate-600 dark:text-slate-700 hidden sm:inline">|</span>
                 
                 <a href="https://www.linkedin.com/in/abdeljalil-el-khyati" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-semibold transition-colors flex items-center gap-1">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
@@ -216,9 +236,49 @@
             </div>
         </div>
     </footer>
-    <!-- Chart.js Scripts -->
+
+    <!-- Chart.js Scripts & Dark Mode Logic -->
     <script>
-        // Professional Color Palette
+        // --- Dark Mode Logic ---
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const darkIcon = document.getElementById('theme-toggle-dark-icon');
+        const lightIcon = document.getElementById('theme-toggle-light-icon');
+
+        // Check local storage or system preference on load
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            lightIcon.classList.remove('hidden');
+        } else {
+            document.documentElement.classList.remove('dark');
+            darkIcon.classList.remove('hidden');
+        }
+
+        themeToggleBtn.addEventListener('click', function() {
+            // Toggle icons
+            darkIcon.classList.toggle('hidden');
+            lightIcon.classList.toggle('hidden');
+
+            // Toggle class and save preference
+            if (localStorage.getItem('color-theme')) {
+                if (localStorage.getItem('color-theme') === 'light') {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                }
+            } else {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                }
+            }
+        });
+
+        // --- Chart.js Configuration ---
         const colors = {
             navy: '#0F172A',
             sky: '#0284C7',
@@ -227,13 +287,16 @@
             amber: '#D97706',
             rose: '#E11D48',
             slate: '#64748B',
-            bg: '#F8FAFC'
+            slateDark: '#94A3B8'
         };
 
-        Chart.defaults.font.family = "'Inter', sans-serif";
-        Chart.defaults.color = colors.slate;
+        // Dynamic text color based on theme
+        function getChartTextColor() {
+            return document.documentElement.classList.contains('dark') ? colors.slateDark : colors.slate;
+        }
 
-        // Helper to wrap long labels
+        Chart.defaults.font.family = "'Inter', sans-serif";
+        
         function wrapLabel(label, maxLength = 20) {
             if (typeof label !== 'string' || label.length <= maxLength) return label;
             const words = label.split(' ');
@@ -257,7 +320,6 @@
                 labels: ['Dec 10', 'Jan 11', 'Feb 11', 'Mar 11', 'Apr 11', 'May 11', 'Jun 11', 'Jul 11', 'Aug 11', 'Sep 11', 'Oct 11', 'Nov 11', 'Dec 11*'],
                 datasets: [{
                     label: 'Monthly Revenue (£)',
-                    // Approximated from notebook monthly_performance for visual representation
                     data: [821452, 689811, 522545, 716215, 536968, 769296, 760547, 718076, 757841, 1056435, 1151263, 1503866, 637790],
                     borderColor: colors.sky,
                     backgroundColor: 'rgba(2, 132, 199, 0.1)',
@@ -274,17 +336,18 @@
                 plugins: {
                     legend: { display: false },
                     tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                return 'Revenue: £' + context.parsed.y.toLocaleString();
-                            }
-                        }
+                        callbacks: { label: function(context) { return 'Revenue: £' + context.parsed.y.toLocaleString(); } }
                     }
                 },
                 scales: {
                     y: {
                         beginAtZero: true,
-                        ticks: { callback: function(value) { return '£' + (value/1000000).toFixed(1) + 'M'; } }
+                        grid: { color: document.documentElement.classList.contains('dark') ? '#334155' : '#E2E8F0' },
+                        ticks: { color: getChartTextColor(), callback: function(value) { return '£' + (value/1000000).toFixed(1) + 'M'; } }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: getChartTextColor() }
                     }
                 }
             }
@@ -299,14 +362,14 @@
                     data: [1243, 1022, 1188, 885],
                     backgroundColor: [colors.emerald, colors.sky, colors.amber, colors.rose],
                     borderWidth: 2,
-                    borderColor: '#FFFFFF'
+                    borderColor: document.documentElement.classList.contains('dark') ? '#1E293B' : '#FFFFFF'
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: {
-                    legend: { position: 'bottom', labels: { boxWidth: 12, padding: 15 } }
+                    legend: { position: 'bottom', labels: { color: getChartTextColor(), boxWidth: 12, padding: 15 } }
                 }
             }
         });
@@ -318,7 +381,7 @@
                 labels: ['United Kingdom', 'Netherlands', 'EIRE', 'Australia', 'Germany', 'France'],
                 datasets: [{
                     label: 'Total Revenue (£)',
-                    data: [9001744, 285446, 283140, 138453, 100000, 95000], // Approximated for top countries based on notebook
+                    data: [9001744, 285446, 283140, 138453, 100000, 95000],
                     backgroundColor: [colors.navy, colors.sky, colors.sky, colors.sky, colors.sky, colors.sky],
                     borderRadius: 4
                 }]
@@ -328,24 +391,19 @@
                 maintainAspectRatio: false,
                 plugins: {
                     legend: { display: false },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                return 'Revenue: £' + context.parsed.y.toLocaleString();
-                            }
-                        }
-                    }
+                    tooltip: { callbacks: { label: function(context) { return 'Revenue: £' + context.parsed.y.toLocaleString(); } } }
                 },
                 scales: {
                     y: {
                         beginAtZero: true,
-                        ticks: { callback: function(value) { return '£' + (value/1000000).toFixed(1) + 'M'; } }
+                        grid: { color: document.documentElement.classList.contains('dark') ? '#334155' : '#E2E8F0' },
+                        ticks: { color: getChartTextColor(), callback: function(value) { return '£' + (value/1000000).toFixed(1) + 'M'; } }
                     },
                     x: {
-                        ticks: {
-                            callback: function(value, index) {
-                                return wrapLabel(this.getLabelForValue(value), 10);
-                            }
+                        grid: { display: false },
+                        ticks: { 
+                            color: getChartTextColor(),
+                            callback: function(value, index) { return wrapLabel(this.getLabelForValue(value), 10); }
                         }
                     }
                 }
@@ -356,16 +414,10 @@
         new Chart(document.getElementById('topProductsChart'), {
             type: 'bar',
             data: {
-                labels: [
-                    'REGENCY CAKESTAND 3 TIER',
-                    'WHITE HANGING HEART T-LIGHT HOLDER',
-                    'ASSORTED COLOUR BIRD ORNAMENT',
-                    'POPCORN HOLDER',
-                    'JUMBO BAG RED RETROSPOT'
-                ],
+                labels: ['REGENCY CAKESTAND 3 TIER', 'WHITE HANGING HEART T-LIGHT HOLDER', 'ASSORTED COLOUR BIRD ORNAMENT', 'POPCORN HOLDER', 'JUMBO BAG RED RETROSPOT'],
                 datasets: [{
                     label: 'Total Revenue (£)',
-                    data: [174156, 110000, 95000, 85000, 80000], // Approximated top performers from notebook context
+                    data: [174156, 110000, 95000, 85000, 80000],
                     backgroundColor: colors.emerald,
                     borderRadius: 4
                 }]
@@ -376,24 +428,19 @@
                 maintainAspectRatio: false,
                 plugins: {
                     legend: { display: false },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                return 'Revenue: £' + context.parsed.x.toLocaleString();
-                            }
-                        }
-                    }
+                    tooltip: { callbacks: { label: function(context) { return 'Revenue: £' + context.parsed.x.toLocaleString(); } } }
                 },
                 scales: {
                     x: {
                         beginAtZero: true,
-                        ticks: { callback: function(value) { return '£' + (value/1000).toFixed(0) + 'k'; } }
+                        grid: { color: document.documentElement.classList.contains('dark') ? '#334155' : '#E2E8F0' },
+                        ticks: { color: getChartTextColor(), callback: function(value) { return '£' + (value/1000).toFixed(0) + 'k'; } }
                     },
                     y: {
-                        ticks: {
-                            callback: function(value, index) {
-                                return wrapLabel(this.getLabelForValue(value), 25);
-                            }
+                        grid: { display: false },
+                        ticks: { 
+                            color: getChartTextColor(),
+                            callback: function(value, index) { return wrapLabel(this.getLabelForValue(value), 25); }
                         }
                     }
                 }
