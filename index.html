@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abdeljalil El Khyati | Data Analyst Portfolio</title>
+    <style>
+        :root {
+            --primary: #1f3a5f;
+            --accent: #2e75b6;
+            --bg: #f8f9fa;
+            --text: #333;
+            --card-bg: #ffffff;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--bg);
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+        header h1 { margin: 0; font-size: 2.5rem; }
+        header p { margin: 0.5rem 0 0; font-size: 1.2rem; opacity: 0.9; }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        .section {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        h2 { color: var(--primary); border-bottom: 2px solid var(--accent); padding-bottom: 0.5rem; margin-top: 0; }
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .metric-card {
+            background: #eef4fb;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            border-left: 4px solid var(--accent);
+        }
+        .metric-card h3 { margin: 0; font-size: 1.8rem; color: var(--primary); }
+        .metric-card p { margin: 0.5rem 0 0; font-size: 0.9rem; color: #555; }
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 1rem;
+            transition: background 0.3s;
+        }
+        .btn:hover { background-color: var(--primary); }
+        .tech-stack span {
+            display: inline-block;
+            background: #e9ecef;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            margin: 0.2rem;
+            font-size: 0.9rem;
+        }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: var(--primary);
+            color: white;
+            margin-top: 2rem;
+        }
+        footer a { color: #bbdefb; text-decoration: none; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Abdeljalil El Khyati</h1>
+    <p>Lead Data Analyst | Evidence-Based Business Insights</p>
+</header>
+
+<div class="container">
+    
+    <!-- Project Overview -->
+    <div class="section">
+        <h2>📊 UK Non-Store Retail Analytics (V1.1)</h2>
+        <p>An end-to-end, validated analytical workflow transforming <strong>541,909 raw transactions</strong> from the UCI Online Retail dataset into actionable business intelligence. This project simulates a real-world analytical engagement, focusing on data quality, revenue reconciliation, and strategic recommendations.</p>
+        <a href="https://github.com/JALILOHUB/uk-nonstore-retail-analytics" class="btn" target="_blank">View GitHub Repository</a>
+        <a href="https://github.com/JALILOHUB/uk-nonstore-retail-analytics/blob/main/04_Outputs/Reports/UCI_Retail_Executive_Presentation.pdf" class="btn" target="_blank" style="background-color: #c0392b;">Download Executive PDF</a>
+    </div>
+
+    <!-- Key Validated Metrics -->
+    <div class="section">
+        <h2>✅ V1.1 Validated Key Metrics</h2>
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <h3>£10.11M</h3>
+                <p>Clean Physical-Product Revenue<br><small>(After £362K operational separation)</small></p>
+            </div>
+            <div class="metric-card">
+                <h3>0.716</h3>
+                <p>Validated Gini Coefficient<br><small>(Corrected customer concentration metric)</small></p>
+            </div>
+            <div class="metric-card">
+                <h3>£0.00</h3>
+                <p>Revenue Reconciliation Difference<br><small>(100% traceable data lineage)</small></p>
+            </div>
+            <div class="metric-card">
+                <h3>84.6%</h3>
+                <p>UK Revenue Share<br><small>(Identified dual-concentration risk)</small></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Analytical Workflow -->
+    <div class="section">
+        <h2>⚙️ Analytical Methodology</h2>
+        <p>This project strictly follows an evidence-based framework:</p>
+        <ol style="font-weight: bold; color: var(--primary);">
+            <li><strong>DATA:</strong> Acquired and reconstructed 8-column dataset from UCI API.</li>
+            <li><strong>EVIDENCE:</strong> Isolated extreme outliers (80,995 units) and separated £362K operational items.</li>
+            <li><strong>INTERPRETATION:</strong> Applied RFM segmentation and Pareto analysis with strict interpretation boundaries (e.g., "bulk-purchasing indicators" instead of unproven "B2B" claims).</li>
+            <li><strong>ACTION:</strong> Delivered 6 prioritized management recommendations based on observed patterns.</li>
+        </ol>
+    </div>
+
+    <!-- Tech Stack -->
+    <div class="section">
+        <h2>🛠️ Technology Stack</h2>
+        <div class="tech-stack">
+            <span>Python 3.12</span>
+            <span>Pandas</span>
+            <span>NumPy</span>
+            <span>Matplotlib</span>
+            <span>Seaborn</span>
+            <span>Jupyter Notebook</span>
+            <span>Git & GitHub</span>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <p>Built with precision and analytical rigor.</p>
+    <p>
+        <a href="https://github.com/JALILOHUB" target="_blank">GitHub</a> | 
+        <a href="https://www.linkedin.com/in/abdeljalil-el-khyati" target="_blank">LinkedIn</a>
+    </p>
+    <p><small>© 2026 Abdeljalil El Khyati. Data sourced from UCI Machine Learning Repository (ID: 352).</small></p>
+</footer>
+
+</body>
+</html>
